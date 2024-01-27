@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-server
+spec:
+  selector:
+    matchLabels:
+      app: example-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: example-server
+    spec:
+      containers:
+      - name: example-server
+        image: example-server:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
