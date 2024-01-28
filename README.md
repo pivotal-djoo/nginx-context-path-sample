@@ -1,12 +1,13 @@
-# NGINX Context Path Sample
+# NGINX Reverse Proxy Sample
 
-Sample project for using NGINX to access both a web app and a backend app using one domain name.
+Sample project for using NGINX to access a web app and multiple backend apps using one domain name.
 
 Included [nginx.conf](web/nginx/nginx.conf) routes the below paths to corresponding web / server app.
 
 https://domain.com/ -> web app  
 https://domain.com/api/ -> server app  
-https://domain.com/api/endpoint -> server app  
+https://domain.com/api/endpoint -> server app 1  
+https://domain.com/api2/endpoint -> server app 2  
 https://domain.com/non-api-route/ -> web app  
 
 Using this method, can allow access to any number of apps accessible from a K8s cluster. Only needs to be exposed internally via services.
@@ -38,6 +39,8 @@ Expose server deployment using a service
 ```bash
 kubectl expose deployment/example-server --port 80 --target-port=3000
 ```
+
+Repeat below step for server 2. Save docker image as example-server2
 
 ## Deploy Web App
 
@@ -105,3 +108,6 @@ kubectl exec example-web-74fc448776-sqkcv -- curl http://example-server.default.
 100    60  100    60    0     0  18072      0 --:--:-- --:--:-- --:--:-- 20000
 {"status":"Running","message":"Hello from backend api app!"}
 ```
+
+### Known issue:
+While running the example-web app locally (via Kind) when opening a url `http://localhost:8080/api` without ending in `/` will redirect to `http://localhost/api` removing the port number. (Not an issue when using a domain or a host name.)
