@@ -1,15 +1,15 @@
-const express = require('express');
+import express, { Request, Response } from 'express';
 const app = express();
 const port = 3000;
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
   res.send({
     status: "Running",
     message: "Hello from backend api app!"
   });
 });
 
-app.get('/endpoint', (req, res) => {
+app.get('/endpoint', (req: Request, res: Response) => {
   res.send({
     path: "/api/endpoint",
     status: "Running",
