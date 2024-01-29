@@ -5,7 +5,7 @@ Sample project for using NGINX to access a web app and multiple backend apps usi
 Included [nginx.conf](web/nginx/nginx.conf) routes the below paths to corresponding web / server app.
 
 https://domain.com/ -> web app  
-https://domain.com/api/ -> server app  
+https://domain.com/api/ -> server app 1   
 https://domain.com/api/endpoint -> server app 1  
 https://domain.com/api2/endpoint -> server app 2  
 https://domain.com/non-api-route/ -> web app  
@@ -40,7 +40,7 @@ Expose server deployment using a service
 kubectl expose deployment/example-server --port 80 --target-port=3000
 ```
 
-Repeat below step for server 2. Save docker image as example-server2
+Repeat above steps for server 2. Save docker image as `example-server2`.
 
 ## Deploy Web App
 
