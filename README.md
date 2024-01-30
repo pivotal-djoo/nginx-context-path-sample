@@ -44,9 +44,14 @@ Repeat above steps for server 2. Save docker image as `example-server2`.
 
 ## Deploy Web App
 
-Build web app image
+Create Nginx ConfigMap (contains default.conf for NGINX)
 ```bash
 cd web
+kubectl apply -f ./nginx-configmap.yaml
+```
+
+Build web app image
+```bash
 docker build -t example-web:latest .
 ```
 
